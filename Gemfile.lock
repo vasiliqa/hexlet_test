@@ -115,6 +115,9 @@ GEM
       i18n (>= 1.8.11, < 2)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    hpricot (0.8.6)
+    html2slim (0.2.0)
+      hpricot
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     io-console (0.7.2)
@@ -350,6 +353,7 @@ DEPENDENCIES
   debug
   devise (~> 4.9)
   faker
+  html2slim
   jbuilder
   jsbundling-rails
   minitest-power_assert
