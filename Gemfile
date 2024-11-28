@@ -21,8 +21,6 @@ gem "jbuilder"
 gem "rubocop-rails"
 gem "slim_lint"
 gem "stackprof"
-gem "sentry-ruby"
-gem "sentry-rails"
 gem "slim"
 gem 'minitest-power_assert'
 gem "devise", "~> 4.9"
