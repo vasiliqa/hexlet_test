@@ -1,0 +1,10 @@
+files:
+  - '**/*.slim'
+
+linters:
+  TrailingWhitespace:
+    enabled: true
+  SpaceAfterComma:
+    enabled: true
+  SpaceBeforeClosing:
+    enabled: true
