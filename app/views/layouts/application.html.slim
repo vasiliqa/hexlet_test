@@ -1,30 +1,25 @@
 doctype html
 html
   head
-    title
-      = content_for(:title) || "Rails Project 64"
-    meta[name="viewport" content="width=device-width,initial-scale=1"]
-    meta[name="apple-mobile-web-app-capable" content="yes"]
     = csrf_meta_tags
     = csp_meta_tag
-    = yield :head
-    link[rel="manifest" href="/manifest.json"]
-    link[rel="icon" href="/icon.png" type="image/png"]
-    link[rel="icon" href="/icon.svg" type="image/svg+xml"]
-    link[rel="apple-touch-icon" href="/icon.png"]
-    = stylesheet_link_tag "application", "data-turbo-track": "reload"
-    = javascript_include_tag "application", "data-turbo-track": "reload", type: "module"
+    = stylesheet_link_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    nav
-      ul
-        li
-          = link_to 'Home', root_path
-        - if user_signed_in?
-          li
-            = link_to 'Log out', destroy_user_session_path, method: :delete
-        - else
-          li
-            = link_to 'Sign In', new_user_session_path
-          li
-            = link_to 'Sign Up', new_user_registration_path
-    = yield
+    .page-container
+      header.navbar
+        nav.container-fluid
+          .navbar-header.d-flex
+            = link_to "Home", root_path
+            - if user_signed_in?
+              li = link_to "Profile", edit_user_registration_path
+              li = link_to "Log out", destroy_user_session_path, method: :delete, data: { turbo: false }
+            - else
+              li = link_to "Login", new_user_session_path
+              li = link_to "Sign Up", new_user_registration_path
+
+      main.container-fluid
+        = yield
+      footer
+        .container
+          p &copy; 2024 Collective blog

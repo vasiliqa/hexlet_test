@@ -1,0 +1,10 @@
+= simple_form_for(@category, data: { turbo: false }) do |f|
+  = f.error_notification
+  - if f.object.errors[:base].present?
+    = f.error_notification message: f.object.errors[:base].to_sentence
+
+  .form-inputs
+    = f.input :name
+
+  .form-actions
+    = f.button :submit

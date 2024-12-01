@@ -223,8 +223,8 @@ GEM
     rake (13.2.1)
     rdoc (6.8.1)
       psych (>= 4.0.0)
-    regexp_parser (2.9.2)
-    reline (0.5.11)
+    regexp_parser (2.9.3)
+    reline (0.5.12)
       io-console (~> 0.5)
     responders (3.1.1)
       actionpack (>= 5.2)
@@ -273,6 +273,9 @@ GEM
     sentry-ruby (5.21.0)
       bigdecimal
       concurrent-ruby (~> 1.0, >= 1.0.2)
+    simple_form (5.3.1)
+      actionpack (>= 5.2)
+      activemodel (>= 5.2)
     slim (5.2.1)
       temple (~> 0.10.0)
       tilt (>= 2.1.0)
@@ -365,6 +368,7 @@ DEPENDENCIES
   selenium-webdriver
   sentry-rails
   sentry-ruby
+  simple_form
   slim
   slim_lint
   sprockets-rails

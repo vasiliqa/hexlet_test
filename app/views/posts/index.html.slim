@@ -1,0 +1,12 @@
+h1 Posts
+
+- @posts.each do |post|
+  .post
+    h2 = link_to post.title, post_path(post)
+    p = post.body
+    p Категория: = post.category.name
+    p Автор: = post.user.email
+
+br
+
+= link_to "New post", new_post_path

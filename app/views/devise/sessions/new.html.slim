@@ -1,13 +1,11 @@
 h2
   | Log in
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+= form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: false }) do |f|
   .field
     = f.label :email
-  br
   = f.email_field :email, autofocus: true, autocomplete: "email"
   .field
     = f.label :password
-  br
   = f.password_field :password, autocomplete: "current-password"
   - if devise_mapping.rememberable?
     .field

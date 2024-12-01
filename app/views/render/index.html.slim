@@ -1,7 +1,21 @@
 main.container
   .row.text-center.justify-content-center
+    .col-12
+      h1.display-4(style="color: rgb(6, 61, 18)")
+        | Welcome to Collective blog
 
-  .col
+  h2 Категории
 
-  h1.display-4
-    | Hello World!
+ul
+  - @categories.each do |category|
+    li
+      = link_to category.name, category_path(category)
+      
+      - if category.posts.any?
+        ul
+          - category.posts.each do |post|
+            li
+              = link_to post.title, post_path(post)
+
+= link_to "New category", new_category_path, data: { turbo: false }
+
