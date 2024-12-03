@@ -10,9 +10,8 @@ div id=dom_id(@post)
 
   p
     strong User:
-    = @post.user_id
+    = @post.user.email
 
   p
     strong Category:
-    = @post.category_id
-
+    = @post.category.name

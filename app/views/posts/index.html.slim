@@ -1,11 +1,17 @@
 h1 Posts
 
+p = notice
+
 - @posts.each do |post|
   .post
     h2 = link_to post.title, post_path(post)
     p = post.body
-    p Категория: = post.category.name
-    p Автор: = post.user.email
+    p Category: = post.category.id
+    p Creator: = post.user.id
+
+    - if post.user == current_user
+      = link_to 'Edit', edit_post_path(post), class: 'btn btn-primary'
+      = button_to "Delete", post_path(post), method: :delete, data: { turbo: false, confirm: "Are you sure?" }, class: 'btn btn-danger'
 
 br
 

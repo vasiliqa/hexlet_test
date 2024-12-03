@@ -21,4 +21,4 @@ div
   = link_to "Create new post", new_post_path
 
 div
-  = button_to "Destroy this category", @category, method: :delete
+  = button_to "Destroy this category", @category, method: :delete, data: { turbo: false }

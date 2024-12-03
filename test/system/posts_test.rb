@@ -1,8 +1,13 @@
 require "application_system_test_case"
 
 class PostsTest < ApplicationSystemTestCase
+  include Devise::Test::IntegrationHelpers
+
   setup do
+    @category = categories(:one)
     @post = posts(:one)
+    @user = users(:one)
+    sign_in @user
   end
 
   test "visiting the index" do
@@ -15,9 +20,8 @@ class PostsTest < ApplicationSystemTestCase
     click_on "New post"
 
     fill_in "Body", with: @post.body
-    fill_in "Category", with: @post.category_id
+    select @category.name, from: "Category"
     fill_in "Title", with: @post.title
-    fill_in "User", with: @post.user_id
     click_on "Create Post"
 
     assert_text "Post was successfully created"
@@ -29,9 +33,8 @@ class PostsTest < ApplicationSystemTestCase
     click_on "Edit this post", match: :first
 
     fill_in "Body", with: @post.body
-    fill_in "Category", with: @post.category_id
+    select @category.name, from: "Category"
     fill_in "Title", with: @post.title
-    fill_in "User", with: @post.user_id
     click_on "Update Post"
 
     assert_text "Post was successfully updated"
