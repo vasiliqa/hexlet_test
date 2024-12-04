@@ -4,10 +4,21 @@ p = notice
 
 - @posts.each do |post|
   .post
-    h2 = link_to post.title, post_path(post)
-    p = post.body
-    p Category: = post.category.id
-    p Creator: = post.user.id
+    h2
+      = link_to post.title, post_path(post)
+    p
+      = post.body
+    p
+    | Category: 
+    = post.category.name
+    p
+    | User:
+    = post.user.email
+    p
+    | Comments:
+    = post.comments.count
+    = link_to 'Посмотреть', post_path(post)
+    br
 
     - if post.user == current_user
       = link_to 'Edit', edit_post_path(post), class: 'btn btn-primary'

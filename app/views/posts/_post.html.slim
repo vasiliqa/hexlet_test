@@ -1,5 +1,4 @@
 div id=dom_id(@post)
-
   p
     strong Title:
     = @post.title
@@ -15,3 +14,34 @@ div id=dom_id(@post)
   p
     strong Category:
     = @post.category.name
+
+h2 Комментарии
+
+p= "#{@post.comments.count} комментариев"
+
+= simple_form_for [ @post, PostComment.new ], url: post_comments_path(@post), data: { turbo: false } do |f|
+  = f.input :content, as: :text, placeholder: 'Ваш комментарий', input_html: { rows: 4 }, label: false
+  = f.button :submit, 'Добавить комментарий'
+
+- @post.comments.roots.each_with_index do |comment, index|
+  div.comment
+    p
+      strong "Комментарий #{index + 1}:"
+      = comment.content
+    p
+      strong "Автор:"
+      = comment.user.email
+
+    - comment.children.each_with_index do |child_comment, child_index|
+      div style="margin-left: 20px;"
+        p
+          strong "Ответ #{child_index + 1}:"
+          = child_comment.content
+        p
+          strong "Автор ответа:"
+          = child_comment.user.email
+
+  = simple_form_for [ @post, PostComment.new ], url: reply_post_comment_path(@post, comment), data: { turbo: false } do |f|
+    = f.input :parent_id, as: :hidden, input_html: { value: comment.id }
+    = f.input :content, as: :text, placeholder: 'Ответить на комментарий', input_html: { rows: 3 }, label: false
+    = f.button :submit, 'Отправить ответ'

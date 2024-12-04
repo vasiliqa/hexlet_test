@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
-  resources :posts
   resources :categories
   devise_for :users
+  resources :posts do
+    resources :comments, controller: 'comments', only: [:create, :reply] do
+      member do
+        post :reply
+      end
+    end
+  end
   # get '/user' => "render#index", :as => :user_root
     # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
