@@ -8,11 +8,7 @@ Rails.application.routes.draw do
       end
     end
   end
-  resources :posts, controller: "likes" do
-    member do
-      post :like
-      delete :unlike
-    end
+  resources :post_likes, controller: "likes", only: [ :create, :destroy ] do
   end
   # get '/user' => "render#index", :as => :user_root
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

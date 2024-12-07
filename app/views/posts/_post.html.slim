@@ -20,10 +20,10 @@ div id=dom_id(@post)
     = @post.liked_users.count
 
     - if @post.liked_users.include?(current_user)
-      = form_with(url: unlike_post_path(@post), method: :delete, data: { turbo: false }) do |form|
+      = form_with(url: post_like_path(@post), method: :delete, data: { turbo: false }) do |form|
         = form.submit 'UnLike'
     - else
-      = form_with(url: like_post_path(@post), method: :post, data: { turbo: false }) do |form|
+      = form_with(url: post_likes_path(@post), method: :post, data: { turbo: false }) do |form|
         = form.submit 'Like'
 
 
