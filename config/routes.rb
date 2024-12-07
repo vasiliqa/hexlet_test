@@ -2,14 +2,20 @@ Rails.application.routes.draw do
   resources :categories
   devise_for :users
   resources :posts do
-    resources :comments, controller: 'comments', only: [:create, :reply] do
+    resources :comments, controller: "comments", only: [ :create, :reply ] do
       member do
         post :reply
       end
     end
   end
+  resources :posts, controller: "likes" do
+    member do
+      post :like
+      delete :unlike
+    end
+  end
   # get '/user' => "render#index", :as => :user_root
-    # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
@@ -20,9 +26,9 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   # Defines the root path route ("/")
-  root to: redirect('/user')
-  
+  root to: redirect("/user")
+
   namespace :user do
-    root :to => "render#index"
+    root to: "render#index"
   end
 end

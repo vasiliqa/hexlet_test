@@ -18,17 +18,17 @@ gem "cssbundling-rails"
 gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
-gem 'ancestry'
+gem "ancestry"
 gem "rubocop-rails"
 gem "slim_lint"
 gem "stackprof"
 gem "sentry-ruby"
 gem "sentry-rails"
 gem "slim"
-gem 'minitest-power_assert'
+gem "minitest-power_assert"
 gem "devise", "~> 4.9"
 gem "faker"
-gem 'simple_form'
+gem "simple_form"
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
@@ -59,7 +59,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
-  gem 'html2slim'
+  gem "html2slim"
 end
 
 group :test do
@@ -69,5 +69,5 @@ group :test do
 end
 
 group :production do
-  gem 'pg'
+  gem "pg"
 end

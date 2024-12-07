@@ -15,6 +15,18 @@ div id=dom_id(@post)
     strong Category:
     = @post.category.name
 
+  p
+    strong Likes:
+    = @post.liked_users.count
+
+    - if @post.liked_users.include?(current_user)
+      = form_with(url: unlike_post_path(@post), method: :delete, data: { turbo: false }) do |form|
+        = form.submit 'UnLike'
+    - else
+      = form_with(url: like_post_path(@post), method: :post, data: { turbo: false }) do |form|
+        = form.submit 'Like'
+
+
 h2 Комментарии
 
 p= "#{@post.comments.count} комментариев"
@@ -35,7 +47,7 @@ p= "#{@post.comments.count} комментариев"
     - comment.children.each_with_index do |child_comment, child_index|
       div style="margin-left: 20px;"
         p
-          strong "Ответ #{child_index + 1}:"
+          strong "Ответ на комментарий#{child_index + 1}:"
           = child_comment.content
         p
           strong "Автор ответа:"

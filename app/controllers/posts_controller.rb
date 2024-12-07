@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, unless: :devise_controller?, only: %i[show edit update destroy]
   before_action :set_post, only: %i[show edit update destroy]
-  before_action :authorize_post, only: [:edit, :update, :destroy]
+  before_action :authorize_post, only: [ :edit, :update, :destroy ]
 
   def index
     @posts = Post.includes(:category, :user).all
@@ -49,7 +49,7 @@ class PostsController < ApplicationController
   def destroy
       @post.destroy
       respond_to do |format|
-        format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+        format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
         format.turbo_stream { render turbo_stream: turbo_stream.remove(@post) }
     end
   end
@@ -61,7 +61,7 @@ class PostsController < ApplicationController
 
     def authorize_post
       unless @post.user == current_user
-        redirect_to posts_url, alert: 'You are not authorized to perform this action.'
+        redirect_to posts_url, alert: "You are not authorized to perform this action."
       end
     end
 
