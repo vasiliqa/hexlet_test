@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   before_action :authorize_post, only: [ :edit, :update, :destroy ]
 
   def index
-    @posts = Post.includes(:category, :user).all
+    @posts = Post.includes(:category, :creator).all
   end
 
   def show
@@ -12,7 +12,7 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = current_user.posts.new
+    @post = Post.new(creator_id: current_user.id)
     @categories = Category.all
   end
 
@@ -21,7 +21,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.new(post_params)
+    @post = Post.new(post_params.merge(creator_id: current_user.id))
 
     respond_to do |format|
       if @post.save
@@ -60,12 +60,12 @@ class PostsController < ApplicationController
     end
 
     def authorize_post
-      unless @post.user == current_user
+      unless @post.creator == current_user
         redirect_to posts_url, alert: "You are not authorized to perform this action."
       end
     end
 
     def post_params
-      params.require(:post).permit(:title, :body, :user_id, :category_id)
+      params.require(:post).permit(:title, :body, :creator_id, :category_id)
     end
 end

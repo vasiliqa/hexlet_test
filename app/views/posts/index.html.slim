@@ -12,15 +12,15 @@ p = notice
     | Category: 
     = post.category.name
     p
-    | User:
-    = post.user.email
+    | Creator:
+    = post.creator.email
     p
     | Comments:
     = post.comments.count
     = link_to 'Посмотреть', post_path(post)
     br
 
-    - if post.user == current_user
+    - if post.creator == current_user
       = link_to 'Edit', edit_post_path(post), class: 'btn btn-primary'
       = button_to "Delete", post_path(post), method: :delete, data: { turbo: false, confirm: "Are you sure?" }, class: 'btn btn-danger'
 
