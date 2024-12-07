@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, unless: :devise_controller?, only: %i[show edit update destroy]
+  before_action :authenticate_user!, unless: :devise_controller?, only: %i[edit update destroy]
   before_action :set_post, only: %i[show edit update destroy]
   before_action :authorize_post, only: [ :edit, :update, :destroy ]
 
