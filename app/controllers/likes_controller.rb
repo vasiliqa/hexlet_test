@@ -10,12 +10,16 @@ class LikesController < ApplicationController
 
     unless @like.save
       redirect_to @post
+    else
+      redirect_to @post
     end
   end
 
   def destroy
     if @like.user == current_user
       unless @like.destroy
+        redirect_to @post
+      else
         redirect_to @post
       end
     else
