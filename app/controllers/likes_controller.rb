@@ -4,7 +4,7 @@ class LikesController < ApplicationController
   before_action :set_like, only: [:destroy]
 
   def create
-    @like = @post.post_likes.new(user: current_user)
+    @like = @post.likes.new(user: current_user)
 
     if @like.save
       redirect_to @post, notice: 'Вы поставили лайк этому посту!'
@@ -32,7 +32,7 @@ class LikesController < ApplicationController
   end
 
   def set_like
-    @like = @post.post_likes.find_by(user: current_user)
+    @like = @post.likes.find_by(user: current_user)
     unless @like
       redirect_to @post
     end
