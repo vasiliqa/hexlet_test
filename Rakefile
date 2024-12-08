@@ -1,4 +1,4 @@
-## frozen_string_literal: true
+# frozen_string_literal: true
 
 # Add your own tasks in files placed in lib/tasks ending in .rake,
 # for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
@@ -9,7 +9,7 @@ Rails.application.load_tasks
 
 namespace :lint do
   desc 'Run slim-lint and minitest tests'
-  task :all do
+  task :all => :environment do
     puts 'Running slim-lint...'
     system('bundle exec slim-lint')
 

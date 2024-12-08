@@ -9,21 +9,21 @@ class LikesController < ApplicationController
     @like = @post.likes.new(user: current_user)
 
     if @like.save
-      redirect_to @post, notice: 'Вы поставили лайк этому посту!'
+      redirect_to @post
     else
-      redirect_to @post, alert: 'Не удалось поставить лайк.'
+      redirect_to @post
     end
   end
 
   def destroy
     if @like.user == current_user
       if @like.destroy
-        redirect_to @post, notice: 'Вы убрали лайк с этого поста.'
+        redirect_to @post
       else
-        redirect_to @post, alert: 'Не удалось убрать лайк.'
+        redirect_to @post
       end
     else
-      redirect_to @post, alert: 'Вы не можете удалить чужой лайк.'
+      redirect_to @post
     end
   end
 
