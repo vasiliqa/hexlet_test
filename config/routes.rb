@@ -23,9 +23,9 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   # Defines the root path route ("/")
-  root to: redirect("/user")
+  # root to: redirect("/user")
 
-  namespace :user do
-    root to: "render#index"
-  end
+  # namespace :user do
+    root "render#index"
+  # end
 end
