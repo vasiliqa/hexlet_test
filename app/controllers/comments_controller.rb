@@ -24,6 +24,7 @@ class CommentsController < ApplicationController
       redirect_to @post
     else
       redirect_to @post
+    end
   end
 
   private
