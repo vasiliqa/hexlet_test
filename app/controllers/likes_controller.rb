@@ -7,16 +7,12 @@ class LikesController < ApplicationController
 
   def create
     @like = @post.likes.new(user: current_user)
-    if @like.user == current_user
-      @like.save
-    end
+    @like.save if @like.user == current_user
     redirect_to @post
   end
 
   def destroy
-    if @like.user == current_user
-      @like.destroy
-    end
+    @like.destroy if @like.user == current_user
     redirect_to @post
   end
 
