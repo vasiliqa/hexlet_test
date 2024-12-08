@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class PostsController < ApplicationController
   before_action :authenticate_user!, unless: :devise_controller?, only: %i[edit update destroy]
   before_action :set_post, only: %i[show edit update destroy]
-  before_action :authorize_post, only: [ :edit, :update, :destroy ]
+  before_action :authorize_post, only: %i[edit update destroy]
 
   def index
     @posts = Post.includes(:category, :creator).all
@@ -25,7 +27,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: "Post was successfully created." }
+        format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -37,7 +39,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to @post, notice: "Post was successfully updated." }
+        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -47,25 +49,26 @@ class PostsController < ApplicationController
   end
 
   def destroy
-      @post.destroy
-      respond_to do |format|
-        format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
-        format.turbo_stream { render turbo_stream: turbo_stream.remove(@post) }
+    @post.destroy
+    respond_to do |format|
+      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@post) }
     end
   end
 
   private
-    def set_post
-      @post = Post.find(params[:id])
-    end
 
-    def authorize_post
-      unless @post.creator == current_user
-        redirect_to posts_url, alert: "You are not authorized to perform this action."
-      end
-    end
+  def set_post
+    @post = Post.find(params[:id])
+  end
 
-    def post_params
-      params.require(:post).permit(:title, :body, :creator_id, :category_id)
-    end
+  def authorize_post
+    return if @post.creator == current_user
+
+    redirect_to posts_url, alert: 'You are not authorized to perform this action.'
+  end
+
+  def post_params
+    params.require(:post).permit(:title, :body, :creator_id, :category_id)
+  end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LikesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_post
@@ -33,8 +35,8 @@ class LikesController < ApplicationController
 
   def set_like
     @like = @post.likes.find_by(user: current_user)
-    unless @like
-      redirect_to @post
-    end
+    return if @like
+
+    redirect_to @post
   end
 end

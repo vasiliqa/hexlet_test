@@ -1,4 +1,6 @@
-require "test_helper"
+# frozen_string_literal: true
+
+require 'test_helper'
 
 class LikesControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
@@ -11,16 +13,16 @@ class LikesControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
   end
 
-  test "should add like to post" do
-    assert_difference("@post.liked_users.count", +1) do
+  test 'should add like to post' do
+    assert_difference('@post.liked_users.count', +1) do
       post post_likes_url(@post)
     end
     assert_redirected_to @post
   end
 
-  test "should remove like from post" do
+  test 'should remove like from post' do
     @post.liked_users << @user
-    assert_difference("@post.liked_users.count", -1) do
+    assert_difference('@post.liked_users.count', -1) do
       delete post_like_url(@post.id, @like.id)
     end
     assert_redirected_to @post

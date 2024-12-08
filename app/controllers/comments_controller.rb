@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   before_action :set_post
   def create
@@ -5,9 +7,9 @@ class CommentsController < ApplicationController
     @comment.user = current_user
 
     if @comment.save
-      redirect_to @post, notice: "Комментарий добавлен."
+      redirect_to @post, notice: 'Комментарий добавлен.'
     else
-      redirect_to @post, alert: "Ошибка при добавлении комментария."
+      redirect_to @post, alert: 'Ошибка при добавлении комментария.'
     end
   end
 
@@ -19,9 +21,9 @@ class CommentsController < ApplicationController
     @comment.user = current_user
 
     if @comment.save
-      redirect_to @post, notice: "Ответ на комментарий добавлен."
+      redirect_to @post, notice: 'Ответ на комментарий добавлен.'
     else
-      redirect_to @post, alert: "Ошибка при добавлении ответа."
+      redirect_to @post, alert: 'Ошибка при добавлении ответа.'
     end
   end
 
