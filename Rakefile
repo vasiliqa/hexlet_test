@@ -11,7 +11,7 @@ namespace :lint do
   desc 'Run slim-lint and minitest tests'
   task all: :environment do
     puts 'Running slim-lint...'
-    system('bundle exec slim-lint **/*.slim')
+    system('bundle exec slim-lint')
 
     puts 'Running minitest tests...'
     system('bundle exec ruby -Itest test/**/*_test.rb')

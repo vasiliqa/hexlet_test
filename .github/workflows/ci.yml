@@ -28,7 +28,7 @@ jobs:
 
       - name: Run slim-lint
         run: |
-          bundle exec slim-lint **/*.slim
+          bundle exec slim-lint
 
       - name: Run minitest tests
         run: |
