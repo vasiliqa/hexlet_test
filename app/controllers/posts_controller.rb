@@ -65,7 +65,7 @@ class PostsController < ApplicationController
   def authorize_post
     return if @post.creator == current_user
 
-    redirect_to posts_url, alert: 'You are not authorized to perform this action.'
+    redirect_to posts_url
   end
 
   def post_params

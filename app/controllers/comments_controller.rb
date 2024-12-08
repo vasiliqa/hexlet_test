@@ -8,8 +8,6 @@ class CommentsController < ApplicationController
 
     if @comment.save
       redirect_to @post
-    else
-      redirect_to @post
     end
   end
 
@@ -21,8 +19,6 @@ class CommentsController < ApplicationController
     @comment.user = current_user
 
     if @comment.save
-      redirect_to @post
-    else
       redirect_to @post
     end
   end

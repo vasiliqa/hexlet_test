@@ -9,7 +9,7 @@ Rails.application.load_tasks
 
 namespace :lint do
   desc 'Run slim-lint and minitest tests'
-  task :all => :environment do
+  task all: :environment do
     puts 'Running slim-lint...'
     system('bundle exec slim-lint')
 
