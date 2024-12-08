@@ -8,3 +8,5 @@ linters:
     enabled: true
   SpaceBeforeClosing:
     enabled: true
+  LineLength:
+    enabled: false
