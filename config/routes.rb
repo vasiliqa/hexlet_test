@@ -8,7 +8,8 @@ Rails.application.routes.draw do
       end
     end
   end
-  resources :post_likes, controller: "likes", only: [ :create, :destroy ] do
+  resources :posts do
+    resources :likes, controller: "likes", only: [ :create, :destroy ]
   end
   # get '/user' => "render#index", :as => :user_root
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
