@@ -4,7 +4,6 @@ exclude:
   - vendor/*
   - node_modules/*
   - '**/devise/**/*.slim'
-  - 'app/views/pwa/*.slim'
 linters:
   LineLength:
     max: 180
