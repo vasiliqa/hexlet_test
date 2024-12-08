@@ -1,12 +1,10 @@
-files:
-  - '**/*.slim'
+---
 
+exclude:
+  - vendor/*
+  - node_modules/*
+  - '**/devise/**/*.slim'
+  - 'app/views/pwa/*.slim'
 linters:
-  TrailingWhitespace:
-    enabled: true
-  SpaceAfterComma:
-    enabled: true
-  SpaceBeforeClosing:
-    enabled: true
   LineLength:
-    enabled: false
+    max: 180

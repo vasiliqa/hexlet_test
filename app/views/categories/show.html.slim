@@ -1,4 +1,4 @@
-p style="color: green"
+p style='color: green'
   = notice
 
 = render @category
@@ -12,13 +12,13 @@ h2 Posts in this category
         = link_to post.title, post_path(post)
 
 div
-  = link_to "Edit this category", edit_category_path(@category)
+  = link_to 'Edit this category', edit_category_path(@category)
 
 div
-  = link_to "Back to categories", categories_path
+  = link_to 'Back to categories', categories_path
 
 div
-  = link_to "Create new post", new_post_path
+  = link_to 'Create new post', new_post_path
 
 div
-  = button_to "Destroy this category", @category, method: :delete, data: { turbo: false }
+  = button_to 'Destroy this category', @category, method: :delete, data: { turbo: false }

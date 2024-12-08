@@ -1,17 +1,17 @@
-.comment style="margin-left: #{level * 20}px;"
+.comment style='margin-left: #{level * 20}px;'
   p
-    strong "Комментарий:"
+    strong 'Комментарий:'
     = comment.content
   p
-    strong "Автор:"
+    strong 'Автор:'
     = comment.user.email
 
-  = simple_form_for [ @post, PostComment.new ], url: reply_post_comment_path(@post, comment), data: { turbo: false } do |f|
+  = simple_form_for [@post, PostComment.new], url: reply_post_comment_path(@post, comment), data: { turbo: false } do |f|
     = f.input :parent_id, as: :hidden, input_html: { value: comment.id }
-    = f.input :content, as: :text, placeholder: "Ответить на комментарий", input_html: { rows: 3 }, label: false
-    = f.button :submit, "Отправить ответ"
+    = f.input :content, as: :text, placeholder: 'Ответить на комментарий', input_html: { rows: 3 }, label: false
+    = f.button :submit, 'Отправить ответ'
 
   - if comment.children.any?
-    div class="children-comments"
+    div class='children-comments'
       - comment.children.each do |child_comment|
-        = render "comment", comment: child_comment, level: level + 1
+        = render 'comment', comment: child_comment, level: level + 1

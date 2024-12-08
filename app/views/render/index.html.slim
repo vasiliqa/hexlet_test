@@ -1,7 +1,7 @@
 main.container
   .row.text-center.justify-content-center
     .col-12
-      h1.display-4(style="color: rgb(6, 61, 18)")
+      h1.display-4(style='color: rgb(6, 61, 18)')
         | Welcome to Collective blog
 
   h2 Категории
@@ -16,4 +16,4 @@ ul
             li
               = link_to post.title, post_path(post)
 
-= link_to "New category", new_category_path, data: { turbo: false }
+= link_to 'New category', new_category_path, data: { turbo: false }
