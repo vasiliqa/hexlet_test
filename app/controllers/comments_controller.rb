@@ -6,21 +6,17 @@ class CommentsController < ApplicationController
     @comment = @post.comments.new(comment_params)
     @comment.user = current_user
 
-    if @comment.save
-      redirect_to @post
-    end
+    return unless @comment.save
+    redirect_to @post
   end
 
   def reply
-    @post = Post.find(params[:post_id])
     @parent_comment = PostComment.find(params[:id])
     @comment = @post.comments.new(comment_params)
-    @comment.parent_id = @parent_comment.id
     @comment.user = current_user
 
-    if @comment.save
-      redirect_to @post
-    end
+    return unless @comment.save
+    redirect_to @post
   end
 
   private
