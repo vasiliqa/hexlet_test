@@ -1,24 +1,22 @@
-p style='color: green'
+p{ style="color: green" }
   = notice
 
 = render @category
 
-h2 Posts in this category
-
 - if @category.posts.any?
-  ul
+  ul.list-group
     - @category.posts.each do |post|
-      li
-        = link_to post.title, post_path(post)
+      li.list-group-item
+        = link_to post.title, post_path(post), class: 'text-decoration-none h5'
 
-div
-  = link_to 'Edit this category', edit_category_path(@category)
+.mt-3
+  = link_to t('category.edit'), edit_category_path(@category), class: 'btn btn-primary btn-lg'
 
-div
-  = link_to 'Back to categories', categories_path
+.mt-3
+  = link_to t('category.back'), categories_path, class: 'btn btn-primary btn-lg'
 
-div
-  = link_to 'Create new post', new_post_path
+.mt-3
+  = link_to t('post.create'), new_post_path, class: 'btn btn-success btn-lg'
 
-div
-  = button_to 'Destroy this category', @category, method: :delete, data: { turbo: false }
+.mt-3
+  = button_to t('category.destroy'), @category, method: :delete, data: { turbo: false }, class: 'btn btn-danger btn-lg'

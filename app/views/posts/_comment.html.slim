@@ -1,17 +1,19 @@
-.comment style='margin-left: #{level * 20}px;'
-  p
-    strong 'Комментарий:'
-    = comment.content
-  p
-    strong 'Автор:'
-    = comment.user.email
+.comment{style: margin-left: level * 20 px;}
+  .card.mb-3
+    .card-body
+      p
+        strong 'Comment:'
+        = comment.content
+      p
+        strong 'Author:'
+        = comment.user.email
 
-  = simple_form_for [@post, PostComment.new], url: reply_post_comment_path(@post, comment), data: { turbo: false } do |f|
-    = f.input :parent_id, as: :hidden, input_html: { value: comment.id }
-    = f.input :content, as: :text, placeholder: 'Ответить на комментарий', input_html: { rows: 3 }, label: false
-    = f.button :submit, 'Отправить ответ'
+      = simple_form_for [@post, PostComment.new], url: reply_post_comment_path(@post, comment), data: { turbo: false } do |f|
+        = f.input :parent_id, as: :hidden, input_html: { value: comment.id }
+        = f.input :content, as: :text, placeholder: t('comment.reply'), input_html: { rows: 3 }, label: false, class: 'form-control'
+        = f.button :submit, t('comment.reply_submit'), class: 'btn btn-success btn-sm'
 
-  - if comment.children.any?
-    div class='children-comments'
-      - comment.children.each do |child_comment|
-        = render 'comment', comment: child_comment, level: level + 1
+      - if comment.children.any?
+        .children-comments
+          - comment.children.each do |child_comment|
+            = render 'comment', comment: child_comment, level: level + 1

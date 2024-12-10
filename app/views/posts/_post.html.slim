@@ -1,38 +1,39 @@
-div id=dom_id(@post)
-  p
-    strong Title:
-    = @post.title
+h1.text-center.display-3.text-body-emphasis
+  = @post.title
 
-  p
-    strong Body:
-    = @post.body
+#dom_id(@post)
+  .row
+    .col-12
+      p.text-muted{style: font-size: 0.9rem;}
+        = @post.body
 
-  p
-    strong Creator:
-    = @post.creator.email
+  .row
+    .col-12.d-flex.justify-content-between
+      .text-muted{style: font-size: 0.8rem;}
+        strong Creator:
+        = @post.creator.email
 
-  p
-    strong Category:
-    = @post.category.name
+      .text-muted{style: font-size: 0.8rem;}
+        strong Likes:
+        = @post.liked_users.count
 
-  p
-    strong Likes:
-    = @post.liked_users.count
+  button.btn.btn-light.ml-2.like-button
+      data: post_id: post.id #{'liked' if @post.liked_users.include?(current_user)}
+      i.bi.bi-hand-thumbs-up{style: font-size: 20px;}
+      - if @post.liked_users.include?(current_user)
+        = form_with(url: post_like_path(@post), method: :delete, data: { turbo: false }) do |form|
+          = form.submit t('post.unlike')
+      - else
+        = form_with(url: post_likes_path(@post), method: :post, data: { turbo: false }) do |form|
+          = form.submit t('post.like')
 
-    - if @post.liked_users.include?(current_user)
-      = form_with(url: post_like_path(@post), method: :delete, data: { turbo: false }) do |form|
-        = form.submit 'UnLike'
-    - else
-      = form_with(url: post_likes_path(@post), method: :post, data: { turbo: false }) do |form|
-        = form.submit 'Like'
+h2 Comments
 
-h2 Комментарии
-
-p = "#{@post.comments.count} комментариев"
+p = "#{@post.comments.count} comments"
 
 = simple_form_for [@post, PostComment.new], url: post_comments_path(@post), data: { turbo: false } do |f|
-  = f.input :content, as: :text, placeholder: 'Ваш комментарий', input_html: { rows: 4 }, label: false
-  = f.button :submit, 'Добавить комментарий'
+  = f.input :content, as: :text, placeholder: t('comment.add'), input_html: { rows: 4 }, label: false
+  = f.button :submit, t('comment.submit'), class: 'btn btn-success mt-3'
 
 - @post.comments.roots.each do |comment|
   = render 'comment', comment: comment, level: 0

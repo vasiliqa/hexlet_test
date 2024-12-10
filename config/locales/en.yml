@@ -29,3 +29,38 @@
 
 en:
   hello: "Hello world"
+  post:
+    editing: "Editing post"
+    edit: "Edit this post"
+    new: "New post"
+    destroy: "Destroy post"
+    submit: "Submit your post"
+    create: "Create post"
+    back: "Back to posts"
+    like: "Like"
+    unlike: "Unlike"
+    show: "Show this post"
+  comment:
+    edit: "Edit this comment"
+    new: "New comment"
+    destroy: "Destroy comment"
+    add: "Your comment"
+    submit: "Submit your comment"
+    reply: "Reply comment"
+    reply_submit: "Submit your reply"
+  category:
+    editing: "Editing Category"
+    edit: "Edit this category"
+    new: "New category"
+    destroy: "Destroy category"
+    back: "Back to categories"
+    show: "Show this category"
+    title: "Categories"
+  destroy:
+    confirm: "Are you sure?"
+  user:
+    login: "Log In"
+    signup: "Sign Up"
+    profile: "Profile"
+    logout: "Log Out"
+    home: "Home"

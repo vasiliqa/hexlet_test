@@ -4,16 +4,17 @@ main.container
       h1.display-4(style='color: rgb(6, 61, 18)')
         | Welcome to Collective blog
 
-  h2 Категории
+  h3.text-center Categories
 
-ul
+ul.list-group
   - @categories.each do |category|
-    li
-      = link_to category.name, category_path(category)
-      - if category.posts.any?
-        ul
-          - category.posts.each do |post|
-            li
-              = link_to post.title, post_path(post)
+    li.list-group-item.border.rounded-3.p-3.mb-2
+      = link_to category.name, category_path(category), class: 'text-success h4 text-decoration-none'
 
-= link_to 'New category', new_category_path, data: { turbo: false }
+      - if category.posts.any?
+        ul.list-group.mt-2
+          - category.posts.each do |post|
+            li.list-group-item
+              = link_to post.title, post_path(post), class: 'text-success text-decoration-none'
+
+= link_to t('category.new'), new_category_path, data: { turbo: false }, class: 'btn btn-success mt-3'

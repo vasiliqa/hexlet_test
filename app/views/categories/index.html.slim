@@ -1,7 +1,7 @@
 p style='color: green'
   = notice
 
-= content_for :title, 'Categories'
+= content_for :title, t('category.title')
 
 h1 Categories
 
@@ -9,6 +9,6 @@ h1 Categories
   - @categories.each do |category|
     = render category
     p
-      = link_to 'Show this category', category
+      = link_to t('category.show'), category
 
-= link_to 'New category', new_category_path
+= link_to t('category.new'), new_category_path

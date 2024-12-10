@@ -10,14 +10,13 @@ html
       header.navbar
         nav.container-fluid
           .navbar-header.d-flex
-            = link_to 'Home', root_path
+            = link_to t('user.home'), root_path, class: 'text-success text-decoration-none'
             - if user_signed_in?
-              li = link_to 'Profile', edit_user_registration_path
-              li = link_to 'Log out', destroy_user_session_path, method: :delete, data: { turbo: false }
+              li = link_to t('user.profile'), edit_user_registration_path, class: 'text-success text-decoration-none'
+              li = link_to t('user.logout'), destroy_user_session_path, method: :delete, data: { turbo: false }, class: 'text-success text-decoration-none'
             - else
-              li = link_to 'Login', new_user_session_path
-              li = link_to 'Sign Up', new_user_registration_path
-
+              li = link_to t('user.login'), new_user_session_path, class: 'text-success text-decoration-none'
+              li = link_to t('user.signup'), new_user_registration_path, class: 'text-success text-decoration-none'
       main.container-fluid
         = yield
       footer
