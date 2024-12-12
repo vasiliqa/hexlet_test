@@ -6,17 +6,28 @@ html
     = stylesheet_link_tag 'application', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
+    - flash.each do |key, message|
+      - if key == 'notice'
+        .alert.alert-success.border-success
+          = message
+      - elsif key == 'alert'
+        .alert.alert-danger.border-danger.role = alert
+          = message
     .page-container
-      header.navbar
+      header.navbar.navbar-expand-lg.navbar-light.bg-light
         nav.container-fluid
-          .navbar-header.d-flex
-            = link_to t('user.home'), root_path, class: 'text-success text-decoration-none'
+          .navbar-header.d-flex.align-items-center
+            = link_to t('user.home'), root_path, class: 'navbar-brand text-success text-decoration-none'
             - if user_signed_in?
-              li = link_to t('user.profile'), edit_user_registration_path, class: 'text-success text-decoration-none'
-              li = link_to t('user.logout'), destroy_user_session_path, method: :delete, data: { turbo: false }, class: 'text-success text-decoration-none'
+              = link_to t('user.profile'), edit_user_registration_path, class: 'navbar-brand text-success text-decoration-none'
+              = link_to t('user.logout'), destroy_user_session_path, method: :delete, data: { turbo: false }, class: 'navbar-brand text-success text-decoration-none'
+              = link_to t('post.create'), new_post_path, class: 'navbar-brand text-success text-decoration-none'
+              .ms-auto.d-flex.align-items-center
+                .navbar-text.text-success.font-weight-bold.fs-4
+                  = current_user.email
             - else
-              li = link_to t('user.login'), new_user_session_path, class: 'text-success text-decoration-none'
-              li = link_to t('user.signup'), new_user_registration_path, class: 'text-success text-decoration-none'
+              = link_to t('user.login'), new_user_session_path, class: 'navbar-brand text-success text-decoration-none'
+              = link_to t('user.signup'), new_user_registration_path, class: 'navbar-brand text-success text-decoration-none'
       main.container-fluid
         = yield
       footer

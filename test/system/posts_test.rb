@@ -45,7 +45,7 @@ class PostsTest < ApplicationSystemTestCase
 
   test 'should destroy Post' do
     visit post_url(@post)
-    click_on 'Destroy this post', match: :first
+    click_on 'Destroy post', match: :first
 
     assert_text 'Post was successfully destroyed'
   end

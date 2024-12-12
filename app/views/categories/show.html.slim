@@ -10,13 +10,7 @@ p{ style="color: green" }
         = link_to post.title, post_path(post), class: 'text-decoration-none h5'
 
 .mt-3
-  = link_to t('category.edit'), edit_category_path(@category), class: 'btn btn-primary btn-lg'
-
-.mt-3
   = link_to t('category.back'), categories_path, class: 'btn btn-primary btn-lg'
 
 .mt-3
   = link_to t('post.create'), new_post_path, class: 'btn btn-success btn-lg'
-
-.mt-3
-  = button_to t('category.destroy'), @category, method: :delete, data: { turbo: false }, class: 'btn btn-danger btn-lg'

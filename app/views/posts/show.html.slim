@@ -1,13 +1,15 @@
 .container
   .p-4.text-center
     .py-4 style='color: green'
-  = notice
 
 = render @post
 
 div
-  = link_to t('post.edit'), edit_post_path(@post), class: 'btn btn-primary mt-3'
-  p
-  = link_to t('post.back'), posts_path, class: 'btn btn-primary mt-3'
-  p
-  = button_to t('post.destroy'), @post, method: :delete, data: { confirm: t('destroy.confirm'), turbo: false }, class: 'btn btn-danger'
+  - if @post.creator == current_user
+    = link_to t('post.edit'), edit_post_path(@post), class: 'btn btn-primary mt-3'
+    p
+    = link_to t('post.back'), posts_path, class: 'btn btn-primary mt-3'
+    p
+    = button_to t('post.destroy'), @post, method: :delete, data: { confirm: t('destroy.confirm'), turbo: false }, class: 'btn btn-danger'
+  - else
+    = link_to t('post.back'), posts_path, class: 'btn btn-primary mt-3'

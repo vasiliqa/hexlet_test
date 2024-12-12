@@ -3,23 +3,35 @@
 class CommentsController < ApplicationController
   before_action :set_post
   def create
-    @comment = @post.comments.new(comment_params)
-    @comment.user = current_user
+    if user_signed_in?
+      @comment = @post.comments.new(comment_params)
+      @comment.user = current_user
 
-    return unless @comment.save
-
-    redirect_to @post
+      if @comment.save
+       redirect_to post_path(@post), notice: I18n.t('comment.save')
+      else
+        redirect_to post_path(@post), alert: I18n.t('comment.failed')
+      end
+    else
+      redirect_to new_user_session_path, alert: I18n.t('comment.fail')
+    end
   end
 
   def reply
-    @parent_comment = PostComment.find(params[:id])
-    @comment = @post.comments.new(comment_params)
-    @comment.user = current_user
+    if user_signed_in?
+      @parent_comment = PostComment.find(params[:id])
+      @comment = @post.comments.new(comment_params)
+      @comment.user = current_user
 
-    return unless @comment.save
-
-    redirect_to @post
-  end
+      if @comment.save
+        redirect_to post_path(@post), notice: I18n.t('comment.save')
+       else
+         redirect_to post_path(@post), alert: I18n.t('comment.failed')
+       end
+     else
+       redirect_to new_user_session_path, alert: I18n.t('comment.fail')
+     end
+   end
 
   private
 

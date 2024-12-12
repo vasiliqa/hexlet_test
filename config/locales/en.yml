@@ -48,6 +48,9 @@ en:
     submit: "Submit your comment"
     reply: "Reply comment"
     reply_submit: "Submit your reply"
+    save: "Comment successfully created"
+    fail: "You should sign in to post comments!"
+    failed: "Comment can't be empty!"
   category:
     editing: "Editing Category"
     edit: "Edit this category"
@@ -64,3 +67,4 @@ en:
     profile: "Profile"
     logout: "Log Out"
     home: "Home"
+    alert: "Login before creating new posts!"

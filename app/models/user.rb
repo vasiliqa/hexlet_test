@@ -6,8 +6,10 @@ class User < ApplicationRecord
   has_many :likes, class_name: 'PostLike', dependent: :destroy
   has_many :liked_posts, through: :post_likes, source: :post, dependent: :destroy
 
+  validates :email, presence: true
+  validates :encrypted_password, presence: true
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :rememberable, :validatable
 end

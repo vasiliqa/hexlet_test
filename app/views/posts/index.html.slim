@@ -1,29 +1,20 @@
 h1 Posts
 
-p = notice
-
 - @posts.each do |post|
-  .post
-    h2
-      = link_to post.title, post_path(post)
-    p
-      = post.body
-    p
-    | Category:
-    = post.category.name
-    p
-    | Creator:
-    = post.creator.email
-    p
-    | Comments:
-    = post.comments.count
-    = link_to 'Show post', post_path(post)
-    br
-
-    - if post.creator == current_user
-      = link_to 'Edit', edit_post_path(post), class: 'btn btn-primary'
-      = button_to 'Delete', post_path(post), method: :delete, data: { turbo: false, confirm: 'Are you sure?' }, class: 'btn btn-danger'
+  .card.mb-4
+    .card-body
+      h2.h4.card-title
+        = link_to post.title, post_path(post), class: 'link-dark text-decoration-none'
+      .card-text.mb-2
+        = post.body
+    .card-footer.text-muted.d-flex.justify-content-between.align-items-center
+      .likes
+        = "Liked #{post.liked_users.count}"
+      .time
+        = "Published #{time_ago_in_words(post.created_at)}  ago"
+      .author
+        = "Published by #{post.creator.email}"
 
 br
 
-= link_to 'New post', new_post_path
+= link_to 'New post', new_post_path, class: 'btn btn-primary mt-3'

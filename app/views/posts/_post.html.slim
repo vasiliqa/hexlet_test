@@ -17,23 +17,20 @@ h1.text-center.display-3.text-body-emphasis
         strong Likes:
         = @post.liked_users.count
 
-  button.btn.btn-light.ml-2.like-button
-      data: post_id: post.id #{'liked' if @post.liked_users.include?(current_user)}
-      i.bi.bi-hand-thumbs-up{style: font-size: 20px;}
-      - if @post.liked_users.include?(current_user)
-        = form_with(url: post_like_path(@post), method: :delete, data: { turbo: false }) do |form|
-          = form.submit t('post.unlike')
-      - else
-        = form_with(url: post_likes_path(@post), method: :post, data: { turbo: false }) do |form|
-          = form.submit t('post.like')
+    - if @post.liked_users.include?(current_user)
+      = button_to post_like_path(@post), method: :delete, class: 'link-dark', data: { turbo: false } do
+        = tag.i(class: 'bi bi-hand-thumbs-up-fill text-white')
+    - else
+      = button_to post_likes_path(@post), method: :post, class: 'link-dark', data: { turbo: false } do
+        = tag.i(class: 'bi bi-hand-thumbs-up')
 
 h2 Comments
 
 p = "#{@post.comments.count} comments"
-
-= simple_form_for [@post, PostComment.new], url: post_comments_path(@post), data: { turbo: false } do |f|
-  = f.input :content, as: :text, placeholder: t('comment.add'), input_html: { rows: 4 }, label: false
-  = f.button :submit, t('comment.submit'), class: 'btn btn-success mt-3'
+- if @post.creator == current_user
+  = simple_form_for [@post, PostComment.new], url: post_comments_path(@post), data: { turbo: false } do |f|
+    = f.input :content, as: :text, placeholder: t('comment.add'), input_html: { rows: 4 }, label: false
+    = f.button :submit, t('comment.submit'), class: 'btn btn-success mt-3'
 
 - @post.comments.roots.each do |comment|
   = render 'comment', comment: comment, level: 0

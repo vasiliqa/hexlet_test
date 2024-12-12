@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   before_action :authorize_post, only: %i[edit update destroy]
 
   def index
-    @posts = Post.includes(:category, :creator).all
+    @posts = Post.includes(:category, :creator).all.order(created_at: :desc)
   end
 
   def show
@@ -14,8 +14,12 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new(creator_id: current_user.id)
-    @categories = Category.all
+    if user_signed_in? 
+      @post = Post.new(creator_id: current_user.id)
+      @categories = Category.all
+    else
+      redirect_to new_user_session_path, alert: I18n.t('user.alert')
+    end
   end
 
   def edit
@@ -24,7 +28,6 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params.merge(creator_id: current_user.id))
-
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: I18n.t('flash.create', model: @post.class.name) }

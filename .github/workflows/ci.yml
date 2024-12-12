@@ -32,4 +32,4 @@ jobs:
 
       - name: Run minitest tests
         run: |
-          bundle exec ruby -Itest test/**/*_test.rb
+          bundle exec rails test:all
