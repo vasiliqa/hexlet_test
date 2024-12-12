@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   before_action :authorize_post, only: %i[edit update destroy]
 
   def index
-    @posts = Post.includes(:category, :creator).all.order(created_at: :desc)
+    @posts = Post.includes(:category, :creator).order(created_at: :desc).all
   end
 
   def show
@@ -14,7 +14,7 @@ class PostsController < ApplicationController
   end
 
   def new
-    if user_signed_in? 
+    if user_signed_in?
       @post = Post.new(creator_id: current_user.id)
       @categories = Category.all
     else

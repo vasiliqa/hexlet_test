@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
       @comment.user = current_user
 
       if @comment.save
-       redirect_to post_path(@post), notice: I18n.t('comment.save')
+        redirect_to post_path(@post), notice: I18n.t('comment.save')
       else
         redirect_to post_path(@post), alert: I18n.t('comment.failed')
       end
@@ -25,13 +25,13 @@ class CommentsController < ApplicationController
 
       if @comment.save
         redirect_to post_path(@post), notice: I18n.t('comment.save')
-       else
-         redirect_to post_path(@post), alert: I18n.t('comment.failed')
-       end
-     else
-       redirect_to new_user_session_path, alert: I18n.t('comment.fail')
-     end
-   end
+      else
+        redirect_to post_path(@post), alert: I18n.t('comment.failed')
+      end
+    else
+      redirect_to new_user_session_path, alert: I18n.t('comment.fail')
+    end
+  end
 
   private
 
