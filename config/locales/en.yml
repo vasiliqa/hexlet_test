@@ -38,8 +38,13 @@ en:
     create: "Create post"
     back: "Back to posts"
     like: "Like"
+    likes: "Likes"
     unlike: "Unlike"
     show: "Show this post"
+    published: "Published"
+    published_by: "Published by"
+    ago: "ago"
+    author: "Author"
   comment:
     edit: "Edit this comment"
     new: "New comment"
@@ -51,6 +56,9 @@ en:
     save: "Comment successfully created"
     fail: "You should sign in to post comments!"
     failed: "Comment can't be empty!"
+    comment: "Comment"
+    comments: "Comments"
+
   category:
     editing: "Editing Category"
     edit: "Edit this category"
@@ -68,3 +76,6 @@ en:
     logout: "Log Out"
     home: "Home"
     alert: "Login before creating new posts!"
+    update: "Update"
+    back: "Back"
+    cancel_account: "Cancle my account"

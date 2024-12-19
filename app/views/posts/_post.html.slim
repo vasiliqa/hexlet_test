@@ -10,25 +10,25 @@ h1.text-center.display-3.text-body-emphasis
   .row
     .col-12.d-flex.justify-content-between
       .text-muted{style: font-size: 0.8rem;}
-        strong Creator:
+        strong = "#{t('post.author')} :"
         = @post.creator.email
 
       .text-muted{style: font-size: 0.8rem;}
-        strong Likes:
+        strong = "#{t('post.likes')} :"
         = @post.liked_users.count
 
     - if @post.liked_users.include?(current_user)
-      = button_to post_like_path(@post), method: :delete, class: 'link-dark', data: { turbo: false } do
+      = button_to post_like_path(@post), method: :delete, class: 'link-dark' do
         = tag.i(class: 'bi bi-hand-thumbs-up-fill text-white')
     - else
-      = button_to post_likes_path(@post), method: :post, class: 'link-dark', data: { turbo: false } do
+      = button_to post_likes_path(@post), method: :post, class: 'link-dark' do
         = tag.i(class: 'bi bi-hand-thumbs-up')
 
 h2 Comments
 
-p = "#{@post.comments.count} comments"
+p = "#{@post.comments.count} #{t('comment.comments')}"
 - if @post.creator == current_user
-  = simple_form_for [@post, PostComment.new], url: post_comments_path(@post), data: { turbo: false } do |f|
+  = simple_form_for [@post, PostComment.new], url: post_comments_path(@post) do |f|
     = f.input :content, as: :text, placeholder: t('comment.add'), input_html: { rows: 4 }, label: false
     = f.button :submit, t('comment.submit'), class: 'btn btn-success mt-3'
 

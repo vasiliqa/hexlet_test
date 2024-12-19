@@ -20,7 +20,7 @@ html
             = link_to t('user.home'), root_path, class: 'navbar-brand text-success text-decoration-none'
             - if user_signed_in?
               = link_to t('user.profile'), edit_user_registration_path, class: 'navbar-brand text-success text-decoration-none'
-              = link_to t('user.logout'), destroy_user_session_path, method: :delete, data: { turbo: false }, class: 'navbar-brand text-success text-decoration-none'
+              = link_to t('user.logout'), destroy_user_session_path, method: :delete, class: 'navbar-brand text-success text-decoration-none'
               = link_to t('post.create'), new_post_path, class: 'navbar-brand text-success text-decoration-none'
               .ms-auto.d-flex.align-items-center
                 .navbar-text.text-success.font-weight-bold.fs-4

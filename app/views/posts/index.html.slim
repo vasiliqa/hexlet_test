@@ -9,12 +9,12 @@ h1 Posts
         = post.body
     .card-footer.text-muted.d-flex.justify-content-between.align-items-center
       .likes
-        = "Liked #{post.liked_users.count}"
+        = "#{t('post.like')} #{post.liked_users.count}"
       .time
-        = "Published #{time_ago_in_words(post.created_at)}  ago"
+        = "#{t('post.published')} #{time_ago_in_words(post.created_at)} #{t('post.ago')}"
       .author
-        = "Published by #{post.creator.email}"
+        = "#{t('post.published_by')} #{post.creator.email}"
 
 br
 
-= link_to 'New post', new_post_path, class: 'btn btn-primary mt-3'
+= link_to t('post.new'), new_post_path, class: 'btn btn-primary mt-3'

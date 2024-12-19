@@ -33,3 +33,7 @@ jobs:
       - name: Run minitest tests
         run: |
           bundle exec rails test:all
+
+      - name: Run RuboCop
+        run: |
+          bundle exec rubocop
